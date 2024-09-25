@@ -1,0 +1,26 @@
+.container {
+    display: flex;
+    height: 100vh; /* Make sure the container takes full height */
+  }
+  
+  .content {
+    flex: 1; /* Allow the content to take the remaining space */
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+  }
+  
+  .mainContent {
+    flex: 1; /* Allow the main content to grow */
+    padding: 20px; /* Add some padding */
+    overflow-y: auto; /* Enable scrolling if content overflows */
+  }
+  
+  .fullscreenPlayer {
+    position: relative;
+    flex: 1;
+  }
+  
+  .how-it-works-section {
+    margin-top: 20px; /* Add some margin above this section */
+  }
+  

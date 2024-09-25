@@ -1,42 +1,274 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html,
+/* General styles */
 body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
   margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #17181d; /* Updated background color */
+  color: #f0f0f0; /* Light text */
 }
 
-a {
-  color: inherit;
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  position: relative;
+}
+
+/* Top links - Normal and Sticky positioning */
+#navbar {
+  position: sticky; /* This makes it sticky */
+  top: 0; /* Position it at the top */
+  display: flex;
+  justify-content: center;
+  gap: 2rem; /* Add space between the links */
+  width: 100%;
+  padding: 1rem; /* Add some padding */
+  background-color: #17181d; /* Background color for sticky navbar */
+  z-index: 1000; /* Ensure it's on top */
+}
+
+/* Navbar links */
+#navbar a {
   text-decoration: none;
+  color: #f0f0f0;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+#navbar a:hover {
+  color: #9b59b6; /* Light purple on hover */
 }
+
+/* Description styles */
+.description {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+/* Custom button styles */
+.custom-button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ffffff; /* White text color */
+  background-color: transparent; /* Transparent background */
+  border: 2px solid #665cb1; /* Border color */
+  border-radius: 0.5rem; /* Rounded corners for the sides */
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover effects */
+.custom-button:hover {
+  background-color: rgba(102, 92, 177, 0.1); /* Light texture on hover */
+  border-color: rgba(102, 92, 177, 0.5); /* Slightly lighter border color on hover */
+  transform: scale(1.05); /* Slightly enlarge the button */
+}
+
+/* How it works section */
+.how-it-works-section {
+  padding: 2rem;
+  background-color: #17181d;
+  min-height: 100vh;
+}
+
+.how-it-works-section h2 {
+  color: #f0f0f0;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+/* Content box for how it works description */
+.content-box {
+  padding: 1rem;
+  border-left: 2px solid #5c27d9; /* Purple border to the left */
+  margin-bottom: 2rem;
+}
+
+.content-box p {
+  font-size: 1.1rem;
+  line-height: 1.7; /* Consider increasing for readability */
+  margin-bottom: 1rem;
+}
+
+/* Privacy section */
+.privacy-section h3 {
+  font-size: 1.5rem;
+  color: #f0f0f0;
+}
+
+.privacy-section p {
+  padding: 1rem;
+  border-left: 2px solid #5c27d9; /* Purple border to the left */
+  font-size: 1.1rem;
+  line-height: 1.7; /* Consider increasing for readability */
+}
+
+/* Fullscreen player */
+.fullscreen-player {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000;
+  z-index: 999;
+}
+
+.audio-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+audio {
+  width: 80%;
+  max-width: 600px;
+}
+/* Fullscreen player */
+.fullscreen-player {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000;
+  z-index: 999;
+}
+
+/* Audio container */
+.audio-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Audio player */
+audio {
+  width: 80%;
+  max-width: 600px;
+}
+
+/* Close button (cross) */
+.close-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 2rem;
+  color: #ffffff;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1000;
+  transition: transform 0.2s ease-in-out;
+}
+
+.close-button:hover {
+  transform: scale(1.1); /* Slightly enlarge on hover */
+}
+/* Fullscreen player */
+.fullscreen-player {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #000;
+  z-index: 999;
+}
+
+/* Waveform container */
+.waveform-container {
+  width: 90%;
+  max-width: 800px;
+  height: 150px;
+}
+
+/* Controls */
+.controls {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+/* Control button */
+.control-button {
+  background-color: #3B8686;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.control-button:hover {
+  background-color: #2A6D6D;
+}
+
+/* Close button */
+.close-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 2rem;
+  color: #ffffff;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.close-button:hover {
+  transform: scale(1.1);
+}
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #17181d; /* Footer background color */
+  border-top: 2px solid white; /* White line border at the top */
+}
+
+.footer-content {
+  display: flex;
+  width: 100%;
+  justify-content: space-between; /* Space between buttons */
+}
+
+.play-button, .save-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: white; /* Text color for buttons */
+  font-size: 1.2em; /* Adjust icon size */
+}
+
+.play-button:hover, .save-button:hover {
+  color: #0070f3; /* Change color on hover */
+}
+
+/* Additional spacing for buttons */
+.save-button {
+  margin-left: auto; /* Pushes the save button to the right */
+}
+
+
