@@ -1,17 +1,15 @@
+// Home.jsx
+
 "use client";
 
-import { useRef, useState, useEffect } from "react";
-import WaveSurfer from "wavesurfer.js";
-import Footer from "./components/Footer"; // Import the Footer component
+import { useRef, useState } from "react";
+import AudioPlayer from "./components/AudioPlayer"; // Import the AudioPlayer component
 
 export default function Home() {
   const howItWorksRef = useRef(null);
-  const fileInputRef = useRef(null); // Ref for file input
-  const [file, setFile] = useState(null); // State to hold the uploaded file
-  const [showPlayer, setShowPlayer] = useState(false); // State to show/hide full-screen player
-  const waveformRef = useRef(null); // Ref for waveform container
-  const wavesurferRef = useRef(null); // Ref for wavesurfer instance
-  const [isPlaying, setIsPlaying] = useState(false); // State to track play/pause status
+  const fileInputRef = useRef(null);
+  const [file, setFile] = useState(null);
+  const [showPlayer, setShowPlayer] = useState(false);
 
   const scrollToSection = () => {
     howItWorksRef.current.scrollIntoView({ behavior: "smooth" });
@@ -21,60 +19,18 @@ export default function Home() {
     const uploadedFile = event.target.files[0];
     if (uploadedFile) {
       setFile(uploadedFile);
-      setShowPlayer(true); // Show the full-screen player after file is uploaded
+      setShowPlayer(true);
     }
   };
 
   const handleButtonClick = () => {
-    fileInputRef.current.click(); // Trigger the file input click
+    fileInputRef.current.click();
   };
 
   const handleClosePlayer = () => {
-    setShowPlayer(false); // Hide the full-screen player
-    if (wavesurferRef.current) {
-      wavesurferRef.current.destroy(); // Destroy the wavesurfer instance when closing the player
-    }
+    setShowPlayer(false);
+    setFile(null); // Reset the file state
   };
-
-  const togglePlayPause = () => {
-    if (wavesurferRef.current) {
-      wavesurferRef.current.playPause(); // Toggle play/pause
-      setIsPlaying(!isPlaying); // Update play/pause state
-    }
-  };
-
-  const handleSave = () => {
-    // Implement the save functionality here
-    console.log("Saving audio as MP3...");
-    // Add your saving logic here
-  };
-
-  useEffect(() => {
-    if (file && waveformRef.current) {
-      // Initialize WaveSurfer.js
-      wavesurferRef.current = WaveSurfer.create({
-        container: waveformRef.current,
-        waveColor: "#A8DBA8",
-        progressColor: "#3B8686",
-        barWidth: 2,
-        responsive: true,
-        height: 128,
-      });
-
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        wavesurferRef.current.loadBlob(new Blob([e.target.result]));
-      };
-      reader.readAsArrayBuffer(file);
-    }
-
-    // Cleanup on unmount
-    return () => {
-      if (wavesurferRef.current) {
-        wavesurferRef.current.destroy();
-      }
-    };
-  }, [file]);
 
   return (
     <>
@@ -91,7 +47,6 @@ export default function Home() {
             Free editor to trim and cut any audio file online
           </p>
 
-          {/* Hidden input for file upload */}
           <input
             type="file"
             ref={fileInputRef}
@@ -105,16 +60,7 @@ export default function Home() {
           </button>
         </div>
       ) : (
-        <div className="fullscreen-player">
-          <button className="close-button" onClick={handleClosePlayer}>
-            ×
-          </button>
-
-          {/* Waveform Container */}
-          <div ref={waveformRef} className="waveform-container"></div>
-          {/* Footer Component */}
-          <Footer onPlay={togglePlayPause} onSave={handleSave} />
-        </div>
+        <AudioPlayer file={file} onClose={handleClosePlayer} />
       )}
 
       <div ref={howItWorksRef} className="how-it-works-section">
